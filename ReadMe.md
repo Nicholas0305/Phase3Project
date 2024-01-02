@@ -21,9 +21,14 @@ Advanced Deliverables:
 3.Each planet's terrain affects the conditions required for a user to establish a colony.The user will need to purchase a higher level colony, which in turn produces more resources, but increases the percentage for alien attacks 
 
 Classes:
+
 Stars
 Planets
 Moons
 Colonies
+
+Trello:
+![Trello](trello.png)
+
 
 	
