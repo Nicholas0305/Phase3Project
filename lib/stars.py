@@ -1,3 +1,3 @@
-class Stars:
-    def __init__(self):
-        pass
+class Star:
+    def __init__(self,name):
+        self.name = name
