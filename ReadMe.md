@@ -24,6 +24,7 @@ Classes:
 
 Stars
 Planets
+
 Moons
 Colonies
 
