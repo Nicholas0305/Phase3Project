@@ -1,5 +1,8 @@
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> main
 class planet:
     def __init__(self,name,terrain,atmosphere,has_colony):
         self.name = name
