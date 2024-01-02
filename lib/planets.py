@@ -1,10 +1,8 @@
-<<<<<<< HEAD
+from big_round_thing import big_round_thing
 
-
-=======
->>>>>>> main
-class planet:
+class planet(big_round_thing):
     def __init__(self,name,terrain,atmosphere,has_colony):
+        super().__init__(name)
         self.name = name
         self.terrain = terrain
         self.atmosphere = atmosphere
