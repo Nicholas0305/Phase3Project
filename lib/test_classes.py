@@ -16,6 +16,18 @@ planet1 = planet("Mars", "Rocky", "thin", False, star1)
 planet2 = planet("Earth", "Rocky", "nice", True, star1) 
 planet3 = planet("Krypton", "Rocky", "unknown", False, star2)
 
+#Establish colonies:
+planet1.set_has_colony(True)
+planet2.set_has_colony(True)
+
+#Create a standard planet and star
+standard_star = Star.create_standard_star('Standard Star')
+standard_planet = planet.create_standard_planet('Standard Planet', standard_star)
+
+#Remove the planet and star
+standard_planet.remove_planet()
+standard_star.remove_star()
+
 # These should all raise exceptions:
 planet4 = planet(100, "Rocky", "thin", False, star1) 
 planet5 = planet("Mars", None, "thin", False, star1) 
