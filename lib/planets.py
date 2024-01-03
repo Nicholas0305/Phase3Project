@@ -80,4 +80,24 @@ class planet(big_round_thing):
 
     star = property(get_star, set_star)
 
-                
+#Sean's code 
+#from sqlalchemy import Column, Integer, String, Boolean, ForeignKey
+#from sqlalchemy.orm import relationship
+#from base import Base
+#from big_round_thing import BigRoundThing
+#from star import Star
+
+#class Planet(BigRoundThing):
+#    __tablename__ = 'planets'
+
+#    id = Column(Integer, ForeignKey('big_round_things.id'), primary_key=True)
+#    terrain = Column(String)
+#    atmosphere = Column(String)
+#    has_colony = Column(Boolean)
+#    star_id = Column(Integer, ForeignKey('stars.id'))
+
+#    star = relationship('Star', back_populates='planets')
+
+#    __mapper_args__ = {
+#        'polymorphic_identity':'planets',
+#    }
