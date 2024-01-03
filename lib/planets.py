@@ -80,6 +80,11 @@ class planet(big_round_thing):
 
     star = property(get_star, set_star)
 
+    #Class method for creating planets with set features
+    @classmethod
+    def create_standard_planet(cls, name, star):
+        return cls(name, 'Standard Terrain', 'Standard Atmosphere', False, star)
+
 #Sean's code 
 #from sqlalchemy import Column, Integer, String, Boolean, ForeignKey
 #from sqlalchemy.orm import relationship
