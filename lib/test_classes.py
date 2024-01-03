@@ -17,6 +17,10 @@ planet1 = planet("Mars", "Rocky", "thin", False, star1)
 planet2 = planet("Earth", "Rocky", "nice", True, star1) 
 planet3 = planet("Krypton", "Rocky", "unknown", False, star2)
 
+#Establish colonies:
+planet1.set_has_colony(True)
+planet2.set_has_colony(True)
+
 # These should all raise exceptions:
 planet4 = planet(100, "Rocky", "thin", False, star1) 
 planet5 = planet("Mars", None, "thin", False, star1) 
