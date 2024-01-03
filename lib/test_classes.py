@@ -37,4 +37,6 @@ standard_star.remove_star()
 # planet1.set_has_colony(True)
 # planet1.set_star(star3)
 
+# print(planet1.sql_insert_command())
+
 ipdb.set_trace()
