@@ -9,6 +9,8 @@
 #    id = Column(Integer, primary_key=True)
 #    name = Column(String, unique=True)
 
+
+
 class big_round_thing:
 
     all = []
@@ -32,8 +34,5 @@ class big_round_thing:
 
     name = property(get_name, set_name)
 
-    def all_names():
-        return [thing.name for thing in big_round_thing.all]
-
-    # def delete(self):
-    #     big_round_thing.all.remove(self)
+    def delete(self):
+        big_round_thing.all.remove(self)
