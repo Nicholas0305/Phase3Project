@@ -23,10 +23,10 @@ class Planet(Base):
 class planet(big_round_thing):
     def __init__(self, name, terrain, atmosphere, has_colony, star):
         super().__init__(name)
-        self._terrain = terrain
-        self._atmosphere = atmosphere
-        self._has_colony = has_colony
-        self._star = star
+        self.terrain = terrain
+        self.atmosphere = atmosphere
+        self.has_colony = has_colony
+        self.star = star
 
     # Terrain property
     def get_terrain(self):

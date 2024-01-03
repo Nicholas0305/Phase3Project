@@ -10,8 +10,7 @@ star2 = Star("Alpha Centauri")
 star3 = Star("Virgo")
 
 # This should raise an exception:
-star4 = Star("The Sun")
-
+# star4 = Star("The Sun")
 
 planet1 = planet("Mars", "Rocky", "thin", False, star1) 
 planet2 = planet("Earth", "Rocky", "nice", True, star1) 
@@ -26,6 +25,8 @@ planet8 = planet("Mars", "Rocky", "thin", False, "The Sun")
 # planet1.set_has_colony(True)
 # planet1.set_star(star3)
 
-print(planet1.__dict__)
+print("planet1's keys are: ")
+print(planet1._name)
+print(planet1.name)
 
 ipdb.set_trace()

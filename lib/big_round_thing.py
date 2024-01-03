@@ -14,8 +14,9 @@
 class big_round_thing:
 
     all = []
+
     def __init__(self, name):
-        self._name = name
+        self.name = name
 
     def get_name(self):
         return self._name
@@ -30,6 +31,9 @@ class big_round_thing:
             big_round_thing.all.append(self)
 
     name = property(get_name, set_name)
+
+    def all_names():
+        return [thing.name for thing in big_round_thing.all]
 
     def delete(self):
         big_round_thing.all.remove(self)
