@@ -1,10 +1,31 @@
+# Run this script to quickly initialize some classes and interact with them
+
 from planets import planet
 from stars import Star
 from big_round_thing import big_round_thing
 import ipdb
 
 star1 = Star("The Sun")
-planet1 = planet("Mars", "Rocky", "thin", False) 
-planet2 = planet("Earth", "Rocky", "nice", True) 
+star2 = Star("Alpha Centauri")
+star3 = Star("Virgo")
+
+# This should raise an exception:
+star4 = Star("The Sun")
+
+
+planet1 = planet("Mars", "Rocky", "thin", False, star1) 
+planet2 = planet("Earth", "Rocky", "nice", True, star1) 
+planet3 = planet("Krypton", "Rocky", "unknown", False, star2)
+
+# These should all raise exceptions:
+planet4 = planet(100, "Rocky", "thin", False, star1) 
+planet5 = planet("Mars", None, "thin", False, star1) 
+planet6 = planet("Mars", "Rocky", [1,2], False, star1) 
+planet7 = planet("Mars", "Rocky", "thin", 0, star1) 
+planet8 = planet("Mars", "Rocky", "thin", False, "The Sun") 
+# planet1.set_has_colony(True)
+# planet1.set_star(star3)
+
+print(planet1.__dict__)
 
 ipdb.set_trace()
