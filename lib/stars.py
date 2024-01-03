@@ -8,6 +8,11 @@ class Star(big_round_thing):
     @classmethod
     def create_standard_star(cls, name):
         return cls(name)
+    
+    #Method to remove the star
+    def remove_star(self):
+        print(f'Removing star: {self.name}')
+        self.delete()
 
 #sean's code
 #from sqlalchemy import Column, Integer, ForeignKey
