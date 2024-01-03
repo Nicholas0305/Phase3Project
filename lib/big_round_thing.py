@@ -1,3 +1,16 @@
+
+#Sean's code
+#from sqlalchemy import Column, Integer, String
+#from base import Base
+
+#class BigRoundThing(Base):
+#    __tablename__ = 'big_round_things'
+
+#    id = Column(Integer, primary_key=True)
+#    name = Column(String, unique=True)
+
+
+
 class big_round_thing:
 
     all = []
