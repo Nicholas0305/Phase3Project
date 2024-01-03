@@ -84,6 +84,11 @@ class planet(big_round_thing):
     @classmethod
     def create_standard_planet(cls, name, star):
         return cls(name, 'Standard Terrain', 'Standard Atmosphere', False, star)
+    
+    #Method to remove the planet
+    def remove_planet(self):
+        print(f'Removing planet: {self.name}')
+        self.delete()
 
 #Sean's code 
 #from sqlalchemy import Column, Integer, String, Boolean, ForeignKey
