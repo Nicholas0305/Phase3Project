@@ -35,6 +35,8 @@ class planet(big_round_thing):
     def set_terrain(self, terrain):
         if not isinstance(terrain, str):
             raise ValueError("terrain must be a string.")
+        elif not 1 <= len(terrain) <= 100:
+            raise ValueError("terrain lengths must be between 1 and 100 characters")
         else:
             self._terrain = terrain
 
@@ -47,6 +49,8 @@ class planet(big_round_thing):
     def set_atmosphere(self, atmosphere):
         if not isinstance(atmosphere, str):
             raise ValueError("atmosphere must be a string.")
+        elif not 1 <= len(atmosphere) <= 100:
+            raise ValueError("atmosphere lengths must be between 1 and 100 characters")
         else:
             self._atmosphere = atmosphere
 
