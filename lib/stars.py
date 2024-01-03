@@ -3,6 +3,11 @@ from big_round_thing import big_round_thing
 class Star(big_round_thing):
     def __init__(self,name):
         super().__init__(name)
+    
+    #Class method for creating stars with set features
+    @classmethod
+    def create_standard_star(cls, name):
+        return cls(name)
 
 #sean's code
 #from sqlalchemy import Column, Integer, ForeignKey
