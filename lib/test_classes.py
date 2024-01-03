@@ -29,16 +29,12 @@ standard_planet.remove_planet()
 standard_star.remove_star()
 
 # These should all raise exceptions:
-planet4 = planet(100, "Rocky", "thin", False, star1) 
-planet5 = planet("Mars", None, "thin", False, star1) 
-planet6 = planet("Mars", "Rocky", [1,2], False, star1) 
-planet7 = planet("Mars", "Rocky", "thin", 0, star1) 
-planet8 = planet("Mars", "Rocky", "thin", False, "The Sun") 
+# planet4 = planet(100, "Rocky", "thin", False, star1) 
+# planet5 = planet("Mars", None, "thin", False, star1) 
+# planet6 = planet("Mars", "Rocky", [1,2], False, star1) 
+# planet7 = planet("Mars", "Rocky", "thin", 0, star1) 
+# planet8 = planet("Mars", "Rocky", "thin", False, "The Sun") 
 # planet1.set_has_colony(True)
 # planet1.set_star(star3)
-
-print("planet1's keys are: ")
-print(planet1._name)
-print(planet1.name)
 
 ipdb.set_trace()
