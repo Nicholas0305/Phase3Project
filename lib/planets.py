@@ -1,48 +1,48 @@
-from sqlalchemy import Column, Integer, String, Boolean, create_engine
-from sqlalchemy.orm import relationship, sessionmaker
-from . import Base
+# from sqlalchemy import Column, Integer, String, Boolean, create_engine
+# from sqlalchemy.orm import relationship, sessionmaker
+# from . import Base
 from big_round_thing import big_round_thing
 from stars import Star
 
-class Planet(Base):
-    __tablename__ = 'planets'
+# class Planet(Base):
+#     __tablename__ = 'planets'
 
-    id = Column(Integer, primary_key=True, index=True)
-    star_id = Column(Integer)
-    name = Column(String, index=True)
-    terrain = Column(String)
-    atmosphere = Column(String)
-    has_colony = Column(Boolean)
-    population = Column(Integer)
+#     id = Column(Integer, primary_key=True, index=True)
+#     star_id = Column(Integer)
+#     name = Column(String, index=True)
+#     terrain = Column(String)
+#     atmosphere = Column(String)
+#     has_colony = Column(Boolean)
+#     population = Column(Integer)
 
-    @classmethod
-    def create_table(cls):
-        Base.metadata.create_all(bind=create_engine)
+#     @classmethod
+#     def create_table(cls):
+#         Base.metadata.create_all(bind=create_engine)
 
-    @classmethod
-    def drop_table(cls):
-        Base.metadata.tables['planets'].drop(bind=create_engine)
+#     @classmethod
+#     def drop_table(cls):
+#         Base.metadata.tables['planets'].drop(bind=create_engine)
     
-    def save(self, session):
-        session.add(self)
-        session.commit()
+#     def save(self, session):
+#         session.add(self)
+#         session.commit()
     
-    def update(self, session):
-        session.commit()
+#     def update(self, session):
+#         session.commit()
     
-    def delete(self, session):
-        session.delete(self)
-        session.commit()
+#     def delete(self, session):
+#         session.delete(self)
+#         session.commit()
     
-    @classmethod
-    def get_planets(cls, session):
-        return session.query(cls).all()
+#     @classmethod
+#     def get_planets(cls, session):
+#         return session.query(cls).all()
     
-    @classmethod
-    def get_planet_by_name(cls, session, name):
-        return session.query(cls).filter_by(name=name).first()
+#     @classmethod
+#     def get_planet_by_name(cls, session, name):
+#         return session.query(cls).filter_by(name=name).first()
 
-class planet(big_round_thing):
+class Planet(big_round_thing):
     def __init__(self, name, terrain, atmosphere, has_colony, star, id = None):
         super().__init__(name)
         self.terrain = terrain
@@ -83,12 +83,16 @@ class planet(big_round_thing):
     def get_has_colony(self):
         return self._has_colony
         
-    def set_has_colony(self, has_colony):
-        if not isinstance(has_colony, bool):
+    def set_has_colony(self, new_has_colony):
+        had_colony = None
+        initializing = not hasattr(self, 'has_colony') 
+        if not initializing:
+            had_colony = self.has_colony
+        if not isinstance(new_has_colony, bool):
             raise ValueError("has_colony must be a boolean.")
         else:
-            self._has_colony = has_colony
-            if (has_colony):
+            self._has_colony = new_has_colony
+            if (not had_colony) and (not initializing):
                 print("Congratulations, you established a colony on " + self.name + "!")
 
     has_colony = property(get_has_colony, set_has_colony)

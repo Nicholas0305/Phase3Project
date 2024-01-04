@@ -3,8 +3,7 @@ from planets import Planet
 from stars import Star
 from init import CURSOR, CONN
 
-Star.create_table()
-Planet.create_table()
+
 
 def list_stars_option():
     sql = """
@@ -82,6 +81,10 @@ def exit_option():
     print("Good job pioneer, go get some rest!")
 
 def main():
+
+    # Prepare to CRUD
+    Star.create_table()
+    Planet.create_table()
     
     # Initialized variables
     exit_menu = False
