@@ -2,27 +2,41 @@
 from planets import planet
 from stars import Star
 from big_round_thing import big_round_thing
-
+#Captures user name 
 def display_welcome_message(username):
     print(f"Welcome {username}! Each Pioneer's job is to establish colonies on other planets.")
     print("Thanks to advances in technology, we are able to create planets via the transformation of star matter into planet matter!")
     print("")
     print("To get started, enter colonize below. Enter Menu anytime to access it\n")
-
+#Navigation menu
 def display_menu():
     return input("Menu: Colonize  Exit (Select an option): ").lower()
+#
+def star_selection(username, stars):
+    while True:
+        print("")
+        print("Available Stars:")
+        print("")
+        for star in stars:
+            print(star.name)
+        print("")
+        star_selection_input = input(f"Welcome {username}! Please select from the list of available stars (type 'menu' to go back): ") 
 
-def colonize_option(username, stars):
-    print("Available Stars:")
-    for star in stars:
-        print(star.name)
-    print("")
-    star_selection = input(f"Welcome {username}! Please select from the list of available stars: ")
+        if star_selection_input.lower() == "menu":
+            return None
 
+        for star in stars:
+            if star_selection_input.lower() == star.name.lower():
+                return star_selection_input
+        print("")
+        print("----------------Enter a valid star--------------------")
+
+#Exit message
 def exit_option():
     print("Good job pioneer, go get some rest!")
 
 def main():
+    
     # Initialized variables
     exit_menu = False
 
@@ -43,10 +57,15 @@ def main():
     while not exit_menu:
         # User inputs if they want to begin the game or exit
         menu_input = display_menu()
-
+        
         # If user inputs colonize, the main game begins and displays stars to travel to.
         if menu_input == "colonize":
-            colonize_option(user_name, example_list)
+            star_selection(user_name, example_list)
+            
+            
+        #Allows the user to return to menu whenever
+        elif menu_input == "menu":
+            return None
 
         # Exits program if the user inputs exit
         elif menu_input == "exit":
