@@ -1,7 +1,27 @@
 #!/usr/bin/env python3
-from planets import planet
+from planets import Planet
 from stars import Star
-from big_round_thing import big_round_thing
+from init import CURSOR, CONN
+
+Star.create_table()
+Planet.create_table()
+
+def list_stars_option():
+    sql = """
+        SELECT * FROM stars
+    """
+    stars_table = CURSOR.execute(sql)
+    for star in stars_table:
+        print(star)
+
+def list_stars_option():
+    sql = """
+        SELECT * FROM planets
+    """
+    planets_table = CURSOR.execute(sql)
+    for planet in planets_table:
+        print(planet)
+
 
 def display_welcome_message(username):
     print(f"Welcome {username}! Each Pioneer's job is to establish colonies on other planets.")
