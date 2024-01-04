@@ -1,55 +1,102 @@
 #!/usr/bin/env python3
-from planets import Planet, create_engine, sessionmaker
+from planets import Planet
 from stars import Star
-from big_round_thing import big_round_thing
+from init import CURSOR, CONN
 
+Star.create_table()
+Planet.create_table()
+
+def list_stars_option():
+    sql = """
+        SELECT * FROM stars
+    """
+    stars_table = CURSOR.execute(sql)
+    for star in stars_table:
+        print(star)
+
+def list_planets_option():
+    sql = """
+        SELECT * FROM planets
+    """
+    planets_table = CURSOR.execute(sql)
+    for planet in planets_table:
+        print(planet)
+
+#Captures user name 
 def display_welcome_message(username):
     print(f"Welcome {username}! Each Pioneer's job is to establish colonies on other planets.")
     print("Thanks to advances in technology, we are able to create planets via the transformation of star matter into planet matter!")
-    print("To get started, follow the prompts below! Good luck!\n")
+    print("")
+    print("To get started, enter colonize below. Enter Menu anytime to access it\n")
 
+#Navigation menu
 def display_menu():
     return input("Menu: Colonize  Exit (Select an option): ").lower()
 
-def colonize_option(username, stars, session):
-    print("Available Stars:")
-    for star in stars:
-        print(star.name)
-    print("")
-    star_name = input(f"Welcome {username}! Please select from the list of available stars: ")
-    selected_star = Star.get_star_by_name(session, star_name)
+#Lets the user travel to a star
+def star_selection(username, stars):
+    while True:
+        print("")
+        print("Available Stars:")
+        print("")
+        for star in stars:
+            print(star.name)
+        print("")
+        star_selection_input = input(f"Welcome {username}! Please select from the list of available stars (type 'menu' to go back): ") 
 
-    if selected_star:
-        #Create a planet associated with the selected star
-        planet_name = input('Enter the name for the new planet: ')
-        new_planet = Planet(name=planet_name, terrain='Standard Terrain', atmosphere='Standard Atmosphere', has_colony=False, star_id=selected_star.id)
+        if star_selection_input.lower() == "menu":
+            return None
 
-        #Save the new planet to the database
-        new_planet.save(session)
-        print(f'Congratulations! Planet {planet_name} has been created and associated with star {selected_star.name}.')
-    else: 
-        print("Invalid star name. Please select a star from the list.")
+        for star in stars:
+            if star_selection_input.lower() == star.name.lower():
+                return star_selection_input
+        print("")
+        print("----------------Enter a valid star--------------------")
 
+def planet_selection(username,example_planets_list,stars):
+    star_choice = star_selection(username,stars)
+    
+    while True:
+        
+        print("Planets:")
+        print("")
+        
+        for planet in example_planets_list:
+            if planet.star.lower() == star_choice.lower():
+                print(planet.name)
+        
+        planet_selection = input(f"{username}, please select or create a planet to establish a colony on")
+        
+        for planet in example_planets_list:
+            if planet_selection.lower() == planet.name.lower() and planet.has_colony == False:
+                print("You've established a colony!")
+                planet.has_colony == True
+        
+        print("There is already a colony on this planet!")
+
+
+
+#Exit message
 def exit_option():
+    
     print("Good job pioneer, go get some rest!")
 
 def main():
+    
     # Initialized variables
     exit_menu = False
 
-    #Create the table for planets
-    Planet.create_table()
-
-    #Use sessionmaker to create a session
-    Session = sessionmaker(bind=create_engine)
-    session = Session()
-
     # Example List of pre-determined stars
-    star1 = Star("The Sun")
-    star2 = Star("Alpha Centauri")
-    star3 = Star("Virgo")
+    star1 = Star.create_star("The Sun")
+    star2 = Star.create_star("Alpha Centauri")
+    star3 = Star.create_star("Virgo")
     example_list = [star1, star2, star3]
 
+    #Example list of pre determined planets
+    planet1 = planet("Mars", "Rocky", "thin", False, star1) 
+    planet2 = planet("Earth", "Rocky", "nice", True, star1) 
+    planet3 = planet("Krypton", "Rocky", "unknown", False, star2)
+    example_planets_list = [planet1,planet2,planet3]
     # User input for Username
     user_name = input("Welcome Pioneer and thank you for choosing Space Tech as your pioneering company! "
                       "To begin your journey, please insert your name: ")
@@ -61,18 +108,21 @@ def main():
     while not exit_menu:
         # User inputs if they want to begin the game or exit
         menu_input = display_menu()
-
+        
         # If user inputs colonize, the main game begins and displays stars to travel to.
         if menu_input == "colonize":
-            colonize_option(user_name, example_list, session)
+            star_selection(user_name, example_list)
+            planet_selection(user_name,example_list)
+            
+            
+        #Allows the user to return to menu whenever
+        elif menu_input == "menu":
+            return None
 
         # Exits program if the user inputs exit
         elif menu_input == "exit":
             exit_option()
             exit_menu = True
-    
-    #Close the session after use
-    session.close()
 
 if __name__ == "__main__":
     main()
