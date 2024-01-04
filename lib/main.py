@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-from planets import planet
+from planets import Planet, create_engine, sessionmaker
 from stars import Star
 from big_round_thing import big_round_thing
 
@@ -11,12 +11,24 @@ def display_welcome_message(username):
 def display_menu():
     return input("Menu: Colonize  Exit (Select an option): ").lower()
 
-def colonize_option(username, stars):
+def colonize_option(username, stars, session):
     print("Available Stars:")
     for star in stars:
         print(star.name)
     print("")
-    input(f"Welcome {username}! Please select from the list of available stars: ")
+    star_name = input(f"Welcome {username}! Please select from the list of available stars: ")
+    selected_star = Star.get_star_by_name(session, star_name)
+
+    if selected_star:
+        #Create a planet associated with the selected star
+        planet_name = input('Enter the name for the new planet: ')
+        new_planet = Planet(name=planet_name, terrain='Standard Terrain', atmosphere='Standard Atmosphere', has_colony=False, star_id=selected_star.id)
+
+        #Save the new planet to the database
+        new_planet.save(session)
+        print(f'Congratulations! Planet {planet_name} has been created and associated with star {selected_star.name}.')
+    else: 
+        print("Invalid star name. Please select a star from the list.")
 
 def exit_option():
     print("Good job pioneer, go get some rest!")
@@ -24,6 +36,13 @@ def exit_option():
 def main():
     # Initialized variables
     exit_menu = False
+
+    #Create the table for planets
+    Planet.create_table()
+
+    #Use sessionmaker to create a session
+    Session = sessionmaker(bind=create_engine)
+    session = Session()
 
     # Example List of pre-determined stars
     star1 = Star("The Sun")
@@ -45,12 +64,15 @@ def main():
 
         # If user inputs colonize, the main game begins and displays stars to travel to.
         if menu_input == "colonize":
-            colonize_option(user_name, example_list)
+            colonize_option(user_name, example_list, session)
 
         # Exits program if the user inputs exit
         elif menu_input == "exit":
             exit_option()
             exit_menu = True
+    
+    #Close the session after use
+    session.close()
 
 if __name__ == "__main__":
     main()
