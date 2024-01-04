@@ -1,6 +1,6 @@
 # Run this script to quickly initialize some classes and interact with them
 
-from planets import planet
+from planets import Planet
 from stars import Star
 from big_round_thing import big_round_thing
 import ipdb
@@ -12,9 +12,9 @@ star3 = Star("Virgo")
 # This should raise an exception:
 # star4 = Star("The Sun")
 
-planet1 = planet("Mars", "Rocky", "thin", False, star1) 
-planet2 = planet("Earth", "Rocky", "nice", True, star1) 
-planet3 = planet("Krypton", "Rocky", "unknown", False, star2)
+planet1 = Planet("Mars", "Rocky", "thin", False, star1) 
+planet2 = Planet("Earth", "Rocky", "nice", True, star1) 
+planet3 = Planet("Krypton", "Rocky", "unknown", False, star2)
 
 #Establish colonies:
 planet1.set_has_colony(True)
@@ -22,7 +22,7 @@ planet2.set_has_colony(True)
 
 #Create a standard planet and star
 standard_star = Star.create_standard_star('Standard Star')
-standard_planet = planet.create_standard_planet('Standard Planet', standard_star)
+standard_planet = Planet.create_standard_planet('Standard Planet', standard_star)
 
 #Remove the planet and star
 standard_planet.remove_planet()
