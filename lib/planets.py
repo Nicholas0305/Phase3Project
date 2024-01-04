@@ -24,7 +24,6 @@ class Planet(big_round_thing):
                 atmosphere TEXT,
                 has_colony BOOLEAN,
                 population INTEGER,
-                big_round_thing_id INTEGER
             )
         """
         CURSOR.execute(sql)
@@ -40,10 +39,10 @@ class Planet(big_round_thing):
     
     def save(self):
         sql = """
-            INSERT INTO planets (star_id, name, terrain, atmosphere, has_colony, population, big_round_thing_id)
+            INSERT INTO planets (star_id, name, terrain, atmosphere, has_colony, population)
             VALUES (?, ?, ?, ?, ?, ?, ?)
         """
-        values = (self.star.id, self.name, self.terrain, self.atmosphere, self.has_colony, self.population, self.big_round_thing_id)
+        values = (self.star.id, self.name, self.terrain, self.atmosphere, self.has_colony, self.population)
         CURSOR.execute(sql, values)
         CONN.commit()
         self.id = CURSOR.lastrowid
@@ -58,10 +57,10 @@ class Planet(big_round_thing):
         sql = """
             UPDATE planets
             SET star_id = ?, name = ?, terrain = ?, atmosphere = ?,
-                has_colony = ?, population = ?, big_round_thing_id = ?
+                has_colony = ?, population = ?
             WHERE id = ?
         """
-        values = (self.star.id, self.name, self.terrain, self.atmosphere, self.has_colony, self.population, self.big_round_thing_id, self.id)
+        values = (self.star.id, self.name, self.terrain, self.atmosphere, self.has_colony, self.population, self.id)
         CURSOR.execute(sql, values)
         CONN.commit()
     
