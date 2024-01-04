@@ -2,7 +2,9 @@ from big_round_thing import big_round_thing
 from init import CURSOR, CONN
 from stars import Star
 
-class Planet(big_round_thing):
+
+
+class planet(big_round_thing):
     def __init__(self, name, terrain, atmosphere, has_colony, star, id = None):
         super().__init__(name)
         self.terrain = terrain
