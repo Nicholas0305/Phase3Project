@@ -1,10 +1,9 @@
-# from sqlalchemy import Column, Integer, String, Boolean
-# from sqlalchemy.orm import relationship
-# from . import Base
+from sqlalchemy import Column, Integer, String, Boolean
+from sqlalchemy.orm import relationship
+from . import Base
 from big_round_thing import big_round_thing
 from stars import Star
 
-"""
 class Planet(Base):
     __tablename__ = 'planets'
 
@@ -18,7 +17,6 @@ class Planet(Base):
     big_round_thing_id = Column(Integer) # We shouldn't need this column because we will not make any instances of big_round_thing. -Evan
 
     big_round_thing = relationship('BigRoundThing', back_populates='planet') # We shouldn't need this for the same reason. -Evan
-"""
 
 class planet(big_round_thing):
     def __init__(self, name, terrain, atmosphere, has_colony, star, id = None):
