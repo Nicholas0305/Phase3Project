@@ -52,27 +52,28 @@ def star_selection(username):
         print("")
         print("----------------Enter a valid star--------------------")
 
-# def planet_selection(username):
-#     star_choice = star_selection(username)
+def planet_selection(username):
+    star_choice = star_selection(username)
     
-#     while True:
+    while True:
+        planets_table = list_planets_option()
+        print("Planets:")
+        print("")
+        #Prints list of planets
+        for planet in planets_table:
+            if planet.star.lower() == star_choice.lower():
+                print(planet.name)
+        #User choice to select or create planet
+        planet_selection = input(f"{username}, please select or create a planet to establish a colony on")
         
-#         print("Planets:")
-#         print("")
+        if planet_selection.lower() == "create":
+            print("Enter the attributes you would like your planet to have")
+            name = input("Enter a name for the Planet")
+            terrain = input("Enter the terrain for the planet")
+            atmosphere = input("Enter the atmosphere for the planet")
+            Planet.create_planet(name,terrain,atmosphere,has_colony=False,star=star_choice)
         
-#         for planet in example_planets_list:
-#             if planet.star.lower() == star_choice.lower():
-#                 print(planet.name)
-        
-#         planet_selection = input(f"{username}, please select or create a planet to establish a colony on")
-        
-#         for planet in example_planets_list:
-#             if planet_selection.lower() == planet.name.lower() and planet.has_colony == False:
-#                 print("You've established a colony!")
-#                 planet.has_colony == True
-        
-#         print("There is already a colony on this planet!")
-
+  
 
 
 #Exit message
@@ -93,10 +94,8 @@ def main():
   
 
     #Example list of pre determined planets
-    planet1 = planet("Mars", "Rocky", "thin", False, star1) 
-    planet2 = planet("Earth", "Rocky", "nice", True, star1) 
-    planet3 = planet("Krypton", "Rocky", "unknown", False, star2)
-    example_planets_list = [planet1,planet2,planet3]
+ 
+   
     # User input for Username
     user_name = input("Welcome Pioneer and thank you for choosing Space Tech as your pioneering company! "
                       "To begin your journey, please insert your name: ")
