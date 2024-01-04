@@ -3,11 +3,7 @@ from planets import Planet
 from stars import Star
 from init import CURSOR, CONN
 
-Star.create_table()
-Planet.create_table()
-star1 = Star.create_star("The Sun")
-star2 = Star.create_star("Alpha Centauri")
-star3 = Star.create_star("Virgo")
+
 
 def list_stars_option():
     sql = """
@@ -119,6 +115,9 @@ def main():
     exit_menu = False
 
     # Example List of pre-determined stars
+    star1 = Star.create_star("The Sun")
+    star2 = Star.create_star("Alpha Centauri")
+    star3 = Star.create_star("Virgo")
     
     #Example list of pre determined planets
  
