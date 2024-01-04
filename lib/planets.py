@@ -51,7 +51,7 @@ class Planet(big_round_thing):
             raise ValueError("has_colony must be a boolean.")
         else:
             self._has_colony = new_has_colony
-            if (not had_colony) and (not initializing):
+            if self.has_colony and (not had_colony) and (not initializing):
                 print("Congratulations, you established a colony on " + self.name + "!")
 
     has_colony = property(get_has_colony, set_has_colony)

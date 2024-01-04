@@ -86,6 +86,8 @@ def main():
     Star.create_table()
     Planet.create_table()
     
+    
+
     # Initialized variables
     exit_menu = False
 
