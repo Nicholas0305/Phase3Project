@@ -58,7 +58,7 @@ class planet(big_round_thing):
 
     # has_colony property
     def get_has_colony(self):
-        return self._get_has_colony
+        return self._has_colony
         
     def set_has_colony(self, has_colony):
         if not isinstance(has_colony, bool):
