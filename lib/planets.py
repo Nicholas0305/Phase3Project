@@ -1,46 +1,9 @@
-# from sqlalchemy import Column, Integer, String, Boolean, create_engine
-# from sqlalchemy.orm import relationship, sessionmaker
-# from . import Base
+
+
 from big_round_thing import big_round_thing
 from stars import Star
 
-# class Planet(Base):
-#     __tablename__ = 'planets'
 
-#     id = Column(Integer, primary_key=True, index=True)
-#     star_id = Column(Integer)
-#     name = Column(String, index=True)
-#     terrain = Column(String)
-#     atmosphere = Column(String)
-#     has_colony = Column(Boolean)
-#     population = Column(Integer)
-
-#     @classmethod
-#     def create_table(cls):
-#         Base.metadata.create_all(bind=create_engine)
-
-#     @classmethod
-#     def drop_table(cls):
-#         Base.metadata.tables['planets'].drop(bind=create_engine)
-    
-#     def save(self, session):
-#         session.add(self)
-#         session.commit()
-    
-#     def update(self, session):
-#         session.commit()
-    
-#     def delete(self, session):
-#         session.delete(self)
-#         session.commit()
-    
-#     @classmethod
-#     def get_planets(cls, session):
-#         return session.query(cls).all()
-    
-#     @classmethod
-#     def get_planet_by_name(cls, session, name):
-#         return session.query(cls).filter_by(name=name).first()
 
 class Planet(big_round_thing):
     def __init__(self, name, terrain, atmosphere, has_colony, star, id = None):
