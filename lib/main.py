@@ -34,8 +34,8 @@ def star_selection(username, stars):
         print("")
         print("----------------Enter a valid star--------------------")
 
-def planet_selection(username,example_planets_list):
-    star_choice = star_selection()
+def planet_selection(username,example_planets_list,stars):
+    star_choice = star_selection(username,stars)
     
     while True:
         
@@ -93,6 +93,7 @@ def main():
         # If user inputs colonize, the main game begins and displays stars to travel to.
         if menu_input == "colonize":
             star_selection(user_name, example_list)
+            planet_selection(user_name,example_list)
             
             
         #Allows the user to return to menu whenever
