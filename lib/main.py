@@ -98,9 +98,9 @@ def main():
     example_list = [star1, star2, star3]
 
     #Example list of pre determined planets
-    planet1 = planet("Mars", "Rocky", "thin", False, star1) 
-    planet2 = planet("Earth", "Rocky", "nice", True, star1) 
-    planet3 = planet("Krypton", "Rocky", "unknown", False, star2)
+    planet1 = Planet("Mars", "Rocky", "thin", False, star1) 
+    planet2 = Planet("Earth", "Rocky", "nice", True, star1) 
+    planet3 = Planet("Krypton", "Rocky", "unknown", False, star2)
     example_planets_list = [planet1,planet2,planet3]
     # User input for Username
     user_name = input("Welcome Pioneer and thank you for choosing Space Tech as your pioneering company! "
