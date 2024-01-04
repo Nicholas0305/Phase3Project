@@ -5,6 +5,9 @@ from init import CURSOR, CONN
 
 Star.create_table()
 Planet.create_table()
+star1 = Star.create_star("The Sun")
+star2 = Star.create_star("Alpha Centauri")
+star3 = Star.create_star("Virgo")
 
 def list_stars_option():
     sql = """
@@ -83,14 +86,14 @@ def exit_option():
     
     print("Good job pioneer, go get some rest!")
 
+
 def main():
     
     # Initialized variables
     exit_menu = False
 
     # Example List of pre-determined stars
-  
-
+    
     #Example list of pre determined planets
  
    
