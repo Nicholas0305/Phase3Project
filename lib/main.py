@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 from planets import Planet
 from stars import Star
+from big_round_thing import big_round_thing
 from init import CURSOR, CONN
-
-
+import ipdb
 
 def list_stars_option():
     sql = """
@@ -15,15 +15,21 @@ def list_stars_option():
     print(star_names)  
     return star_names
 
+# def make_planets_from_sql(sql):
+#     planets = [Planet(list(planet)[1], list(planet)[2], list(planet)[3], list(planet)[4], Star.get_star_by_id(list(planet)[6])) for planet in sql]
+#     return planets
+
 def list_planets_option():
     sql = """
         SELECT * FROM planets
     """
     CURSOR.execute(sql)
     planet_table = CURSOR.fetchall()
-    planet_names = [planet[1] for planet in planet_table]
-    print(planet_names)
-    return planet_names
+    # Create planet objects from sql response data
+    planets = make_planets_from_sql(planet_table)
+    for planet in planets:
+        print(planet.name)
+    pass
 
 #Captures user name 
 def display_welcome_message(username):
@@ -56,28 +62,27 @@ def star_selection(username):
             print("Traveling to star")
             print("")
             return star_selection_input
-        
-
-
+    
         print("")
         print("----------------Enter a valid star--------------------")
 
 def planet_selection(username, star_choice):
-    
-    print("I'm in planet selection")
-    while True:
-        print("")
-        print("Planets:")
-        print("")
-        planets_table = list_planets_option()
-        print("")
+    star_choice = str(star_choice)
+    planet_menu = True
+    # print("I'm in planet selection")
+    print([thing.name for thing in big_round_thing.all])
+    # ipdb.set_trace()
+    star_instance = [star for star in big_round_thing.all if star.name.lower() == "The Sun".lower()][0]
+    if not isinstance(star_instance, Star):
+        print(f"star_instance vlue is {star_instance}")
+        raise ValueError("failed to get star_instance in planet_selection().")
+    while planet_menu:
+        planets = [item for item in big_round_thing.all if isinstance(item, Planet)]
+        planets = [planet for planet in planets if planet.star.name.lower() == star_choice.lower()]
         # Prints list of planets for the selected star
-        for planet in planets_table:
-            if planet.star.lower() == star_choice.lower():
-                print(planet.name)
+        print('\n' + "Planets:" + '\n' + str([planet.name for planet in planets]))
         # User choice to select or create planet
         planet_selection_input = input(f"{username}, please select or create a planet to establish a colony on (type 'menu' to go back): ")
-        star_instance = Star.get_star_by_name(star_choice)
         if planet_selection_input.lower() == "menu":
             return None
 
@@ -87,7 +92,7 @@ def planet_selection(username, star_choice):
             name = input("Enter a name for the Planet:")
             terrain = input("Enter the terrain for the planet:")
             atmosphere = input("Enter the atmosphere for the planet:")
-            Planet.create_planet(name, terrain, atmosphere, has_colony=False, star=star_instance)
+            Planet.create_planet(name, terrain, atmosphere, False, star_instance)
             # Optionally, you can break out of the loop or perform other actions here
 
         # Add more conditions as needed
@@ -95,19 +100,15 @@ def planet_selection(username, star_choice):
         print("")
         print("----------------Enter a valid planet--------------------")
 
-        
-  
-
-
 #Exit message
 def exit_option():
-    
     print("Good job pioneer, go get some rest!")
 
 
 def main():
-
     # Prepare to CRUD
+    Star.drop_table()
+    Planet.drop_table()
     Star.create_table()
     Planet.create_table()
     
@@ -120,7 +121,11 @@ def main():
     star3 = Star.create_star("Virgo")
     
     #Example list of pre determined planets
+    planet1 = Planet.create_planet("Earth", "Rocky", "Air", True, star1)
+    planet2 = Planet.create_planet("Mars", "Rocky", "Thin", False, star1)
+    planet3 = Planet.create_planet("Pluto", "Rocky", "None", False, star1)
  
+    # print(big_round_thing.all)
    
     # User input for Username
     user_name = input("Welcome Pioneer and thank you for choosing Space Tech as your pioneering company! "
@@ -137,8 +142,7 @@ def main():
         # If user inputs colonize, the main game begins and displays stars to travel to.
         if menu_input == "colonize":
             selected_star = star_selection(user_name)
-            if selected_star is not None:
-                
+            if selected_star:
                 planet_selection(user_name, selected_star)
 
             

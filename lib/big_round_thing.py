@@ -5,12 +5,14 @@ class big_round_thing:
 
     def __init__(self, name):
         self.name = name
+        if not self in big_round_thing.all:
+            big_round_thing.all.append(self)
 
     def get_name(self):
         return self._name
     
     def set_name(self, name):
-        # is the planet/star being renamed?
+        # Did self already have a name?
         old_name = None
         if hasattr(self,'name'):
             old_name = self.name
@@ -23,8 +25,6 @@ class big_round_thing:
             raise ValueError("that name is already taken.")
         else:
             self._name = name
-            if not self in big_round_thing.all:
-                big_round_thing.all.append(self)
             if old_name:
                 print(f'{old_name} was renamed to {self.name}.')
 

@@ -17,12 +17,12 @@ class Planet(big_round_thing):
         sql = """
             CREATE TABLE IF NOT EXISTS planets (
                 id INTEGER PRIMARY KEY,
-                star_id INTEGER,
                 name TEXT,
                 terrain TEXT,
                 atmosphere TEXT,
                 has_colony BOOLEAN,
-                population INTEGER
+                population INTEGER,
+                star_id INTEGER
             );
         """
         CURSOR.execute(sql)
@@ -38,10 +38,10 @@ class Planet(big_round_thing):
     
     def save(self):
         sql = """
-            INSERT INTO planets (star_id, name, terrain, atmosphere, has_colony, population)
-            VALUES (?, ?, ?, ?, ?, ?, ?);
+            INSERT INTO planets ( name, terrain, atmosphere, has_colony, population, star_id)
+            VALUES (?, ?, ?, ?, ?, ?);
         """
-        values = (self.star.id, self.name, self.terrain, self.atmosphere, self.has_colony, self.population)
+        values = ( self.name, self.terrain, self.atmosphere, self.has_colony, self.population, self.star.id)
         CURSOR.execute(sql, values)
         CONN.commit()
         self.id = CURSOR.lastrowid
@@ -70,6 +70,7 @@ class Planet(big_round_thing):
         """
         CURSOR.execute(sql, (self.id,))
         CONN.commit
+        super().delete(self)
     
     @classmethod
     def get_planets(cls):

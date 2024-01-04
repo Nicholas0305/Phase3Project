@@ -2,7 +2,7 @@ from big_round_thing import big_round_thing
 from init import CURSOR, CONN
 
 class Star(big_round_thing):
-    def __init__(self,name, id = None):
+    def __init__(self, name, id = None):
         super().__init__(name)
         self.id = id
     
@@ -76,6 +76,17 @@ class Star(big_round_thing):
             return cls(star_name, id=star_id)
         else:
             return None
+        
+    @classmethod
+    def get_star_by_id(cls, id):
+        sql = "SELECT * FROM stars WHERE id = ?;"
+        result = CURSOR.execute(sql, (id,)).fetchone()
+
+        if result:
+            star_id, star_name = result
+            return cls(star_name, id=star_id)
+        else:
+            return None
     
     def update(self):
         sql = """
@@ -93,3 +104,4 @@ class Star(big_round_thing):
         """
         CURSOR.execute(sql, (self.id,))
         CONN.commit()
+        super().delete(self)
