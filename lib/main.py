@@ -14,7 +14,7 @@ def list_stars_option():
     for star in stars_table:
         print(star)
 
-def list_stars_option():
+def list_planets_option():
     sql = """
         SELECT * FROM planets
     """
