@@ -12,6 +12,7 @@ class Planet(big_round_thing):
         self.has_colony = has_colony
         self.star = star
         self.id = id
+        self.population = 0
     
     @classmethod
     def create_table(cls):
