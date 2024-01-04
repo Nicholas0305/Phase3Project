@@ -1,9 +1,5 @@
-
-
 from big_round_thing import big_round_thing
 from stars import Star
-
-
 
 class Planet(big_round_thing):
     def __init__(self, name, terrain, atmosphere, has_colony, star, id = None):

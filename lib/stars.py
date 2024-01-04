@@ -69,3 +69,4 @@ class Star(big_round_thing):
         """
         CURSOR.execute(sql, (self.id,))
         CONN.commit()
+        big_round_thing.all.remove(self)
