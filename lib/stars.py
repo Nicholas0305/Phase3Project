@@ -5,7 +5,6 @@ class Star(big_round_thing):
     def __init__(self,name, id = None):
         super().__init__(name)
         self.id = id
-        self.save()
     
     #Class method for creating stars with set features
     @classmethod
@@ -31,9 +30,8 @@ class Star(big_round_thing):
 
     @classmethod
     def drop_table(cls):
-        """ Drop the table that persists Department instances """
         sql = """
-            DROP TABLE IF EXISTS departments;
+            DROP TABLE IF EXISTS stars;
         """
         CURSOR.execute(sql)
         CONN.commit()
@@ -44,10 +42,34 @@ class Star(big_round_thing):
             VALUES (?)
         """
 
-        CURSOR.execute(sql, (self.name))
+        CURSOR.execute(sql, [self.name])
         CONN.commit()
 
         self.id = CURSOR.lastrowid
+
+    @classmethod
+    def create_star(cls, name):
+        star = cls(name)
+        star.save()
+        return star
+    
+    def update(self):
+        sql = """
+            UPDATE stars
+            SET name = ?
+            WHERE id = ?
+        """
+        CURSOR.execute(sql, (self.name, self.id))
+        CONN.commit()
+
+    def delete(self):
+        sql = """
+            DELETE FROM stars
+            WHERE id = ?
+        """
+        CURSOR.execute(sql, (self.id,))
+        CONN.commit()
+
 
     
 
