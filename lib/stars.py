@@ -5,6 +5,7 @@ class Star(big_round_thing):
     def __init__(self,name, id = None):
         super().__init__(name)
         self.id = id
+        self.save()
     
     #Class method for creating stars with set features
     @classmethod
@@ -36,6 +37,19 @@ class Star(big_round_thing):
         """
         CURSOR.execute(sql)
         CONN.commit()
+
+    def save(self):
+        sql = """
+            INSERT INTO stars (name)
+            VALUES (?)
+        """
+
+        CURSOR.execute(sql, (self.name))
+        CONN.commit()
+
+        self.id = CURSOR.lastrowid
+
+    
 
 
 
