@@ -44,16 +44,6 @@ class big_round_thing:
 
     def all_names():
         return [thing.name for thing in big_round_thing.all]
-    
-    def sql_insert_command(self):
-        props = list(self.__dict__.keys())
-        print("props = " , props)
-        vals = ""
-        for prop in props:
-            vals += self.prop + " "
-        print("vals = " , vals)
-        command = "INSERT INTO " + table + " " + str(set(props)) + " VALUES (" + vals +");"
-        return command
 
     def delete(self):
         big_round_thing.all.remove(self)
