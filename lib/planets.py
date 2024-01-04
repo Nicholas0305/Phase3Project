@@ -24,7 +24,6 @@ class Planet(big_round_thing):
                 population INTEGER,
                 star_id INTEGER
             );
->>>>>>> 8e1ee3fe50b74cb46fa4b6ddcd86be442384517d
         """
         CURSOR.execute(sql)
         CONN.commit

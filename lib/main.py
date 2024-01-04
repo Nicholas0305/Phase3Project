@@ -72,8 +72,8 @@ def planet_selection(username, star_choice):
     star_choice = str(star_choice)
     planet_menu = True
     # print("I'm in planet selection")
-    print([thing.name for thing in big_round_thing.all])
-    # ipdb.set_trace()
+    # print([thing.name for thing in big_round_thing.all])
+    #  I RAN INTO MAJOR DIFFICULTIES HERE. I HAD TO REPLACE star_choice WITH HARDCODED "The Sun" IN ORDER TO GET A STAR INSTANCE. -EVAN
     star_instance = [star for star in big_round_thing.all if star.name.lower() == "The Sun".lower()][0]
     if not isinstance(star_instance, Star):
         print(f"star_instance vlue is {star_instance}")
