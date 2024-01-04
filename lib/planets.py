@@ -1,5 +1,5 @@
-from sqlalchemy import Column, Integer, String, Boolean
-from sqlalchemy.orm import relationship
+from sqlalchemy import Column, Integer, String, Boolean, create_engine
+from sqlalchemy.orm import relationship, sessionmaker
 from . import Base
 from big_round_thing import big_round_thing
 from stars import Star
@@ -14,9 +14,33 @@ class Planet(Base):
     atmosphere = Column(String)
     has_colony = Column(Boolean)
     population = Column(Integer)
-    big_round_thing_id = Column(Integer) # We shouldn't need this column because we will not make any instances of big_round_thing. -Evan
 
-    big_round_thing = relationship('BigRoundThing', back_populates='planet') # We shouldn't need this for the same reason. -Evan
+    @classmethod
+    def create_table(cls):
+        Base.metadata.create_all(bind=create_engine)
+
+    @classmethod
+    def drop_table(cls):
+        Base.metadata.tables['planets'].drop(bind=create_engine)
+    
+    def save(self, session):
+        session.add(self)
+        session.commit()
+    
+    def update(self, session):
+        session.commit()
+    
+    def delete(self, session):
+        session.delete(self)
+        session.commit()
+    
+    @classmethod
+    def get_planets(cls, session):
+        return session.query(cls).all()
+    
+    @classmethod
+    def get_planet_by_name(cls, session, name):
+        return session.query(cls).filter_by(name=name).first()
 
 class planet(big_round_thing):
     def __init__(self, name, terrain, atmosphere, has_colony, star, id = None):
