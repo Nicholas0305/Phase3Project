@@ -5,7 +5,7 @@ from stars import Star
 
 
 
-class planet(big_round_thing):
+class Planet(big_round_thing):
     def __init__(self, name, terrain, atmosphere, has_colony, star, id = None):
         super().__init__(name)
         self.terrain = terrain
