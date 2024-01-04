@@ -73,7 +73,7 @@ def planet_selection(username, star_choice):
     planet_menu = True
     star_instance = [star for star in big_round_thing.all if star.name.lower() == "The Sun".lower()][0]
     if not isinstance(star_instance, Star):
-        print(f"star_instance vlue is {star_instance}")
+        print(f"star_instance value is {star_instance}")
         raise ValueError("failed to get star_instance in planet_selection().")
     while planet_menu:
         planets = [item for item in big_round_thing.all if isinstance(item, Planet)]
@@ -92,6 +92,15 @@ def planet_selection(username, star_choice):
         elif planet_selection_input in planet_names:
             print(f"You have selected {planet_selection_input}")
             # Add code here to handle the selected planet
+            planet = [planet for planet in big_round_thing.all if planet.name.lower() == planet_selection_input.lower()][0]
+            has_colony_text = "has a colony." if planet.has_colony else "does not have a colony. "
+            print(f"{planet.name} {has_colony_text}")
+            if not planet.has_colony:
+                colony_input = input(f"{planet.name} Establish a colony? Eanter Y/N: ")
+                if colony_input == "Y":
+                    planet.has_colony = True
+                    planet.update()
+
         else:
             print("")
             print("----------------Enter a valid planet--------------------")

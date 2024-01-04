@@ -53,6 +53,7 @@ class Planet(big_round_thing):
         return planet
     
     def update(self):
+        print("planet.update has been called")
         sql = """
             UPDATE planets
             SET star_id = ?, name = ?, terrain = ?, atmosphere = ?,
