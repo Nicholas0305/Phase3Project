@@ -21,12 +21,13 @@ class Planet(Base):
 """
 
 class planet(big_round_thing):
-    def __init__(self, name, terrain, atmosphere, has_colony, star):
+    def __init__(self, name, terrain, atmosphere, has_colony, star, id = None):
         super().__init__(name)
         self.terrain = terrain
         self.atmosphere = atmosphere
         self.has_colony = has_colony
         self.star = star
+        self.id = id
 
     # Terrain property
     def get_terrain(self):
