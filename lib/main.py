@@ -6,7 +6,8 @@ from big_round_thing import big_round_thing
 def display_welcome_message(username):
     print(f"Welcome {username}! Each Pioneer's job is to establish colonies on other planets.")
     print("Thanks to advances in technology, we are able to create planets via the transformation of star matter into planet matter!")
-    print("To get started, follow the prompts below! Good luck!\n")
+    print("")
+    print("To get started, enter colonize below. Enter Menu anytime to access it\n")
 
 def display_menu():
     return input("Menu: Colonize  Exit (Select an option): ").lower()
@@ -16,7 +17,7 @@ def colonize_option(username, stars):
     for star in stars:
         print(star.name)
     print("")
-    input(f"Welcome {username}! Please select from the list of available stars: ")
+    star_selection = input(f"Welcome {username}! Please select from the list of available stars: ")
 
 def exit_option():
     print("Good job pioneer, go get some rest!")
