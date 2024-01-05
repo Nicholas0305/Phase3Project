@@ -54,6 +54,7 @@ class Planet(big_round_thing):
     
     def update(self):
         print("planet.update has been called")
+        print(f"{self.name} has a colony: {self.has_colony}")
         sql = """
             UPDATE planets
             SET star_id = ?, name = ?, terrain = ?, atmosphere = ?,

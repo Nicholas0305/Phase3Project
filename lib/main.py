@@ -71,7 +71,7 @@ def star_selection(username):
 def planet_selection(username, star_choice):
     star_choice = str(star_choice)
     planet_menu = True
-    star_instance = [star for star in big_round_thing.all if star.name.lower() == "The Sun".lower()][0]
+    star_instance = [star for star in big_round_thing.all if star.name.lower() == star_choice.lower()][0]
     if not isinstance(star_instance, Star):
         print(f"star_instance value is {star_instance}")
         raise ValueError("failed to get star_instance in planet_selection().")
