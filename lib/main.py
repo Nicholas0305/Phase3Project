@@ -15,9 +15,31 @@ def list_stars_option():
     print(star_names)  
     return star_names
 
-# def make_planets_from_sql(sql):
-#     planets = [Planet(list(planet)[1], list(planet)[2], list(planet)[3], list(planet)[4], Star.get_star_by_id(list(planet)[6])) for planet in sql]
-#     return planets
+def make_planets_from_db():
+    # When main.py starts, initialize instances corresponding to the rows in the database
+    sql = """
+        SELECT * FROM planets
+    """
+    CURSOR.execute(sql)
+    planets_table = CURSOR.fetchall()
+    # print(planets_table)
+    planets = [list(planet) for planet in planets_table]
+    planets = [Planet(planet[1], planet[2], planet[3], bool(planet[4]), [star for star in big_round_thing.all if isinstance(star,Star) and star.id == planet[6]][0]) for planet in planets]
+    return planets
+
+def make_stars_from_db():
+    # When main.py starts, initialize instances corresponding to the rows in the database
+    sql = """
+        SELECT * FROM stars
+    """
+    CURSOR.execute(sql)
+    stars_table = CURSOR.fetchall()
+    # stars_table is a list of tuples. make them lists.
+    # print(stars_table)
+    stars = [list(star) for star in stars_table]
+    # initialize star objects without adding them to the db
+    stars = [Star(star[1], star[0]) for star in stars]
+    return stars
 
 def list_planets_option():
     sql = """
@@ -112,24 +134,33 @@ def exit_option():
 
 def main():
     # Prepare to CRUD
-    Star.drop_table()
-    Planet.drop_table()
+
     Star.create_table()
     Planet.create_table()
+    print("""===========================================================
+============ PLANET COLONIZER: THE VIDEO GAME =============
+===========================================================""")
+    print("loading database...")
+    loaded_stars = make_stars_from_db()
+    loaded_star_names = [star.name for star in loaded_stars]
+    print(f"Loaded {loaded_star_names}")    
+    loaded_planets = make_planets_from_db()
+    loaded_planet_names = [planet.name for planet in loaded_planets]
+    print(f"Loaded {loaded_planet_names}")
+
     
     # Initialized variables
     exit_menu = False
 
-    # Example List of pre-determined stars
-    star1 = Star.create_star("The Sun")
-    star2 = Star.create_star("Alpha Centauri")
-    star3 = Star.create_star("Virgo")
-    
-    #Example list of pre determined planets
-    planet1 = Planet.create_planet("Earth", "Rocky", "Air", True, star1)
-    planet2 = Planet.create_planet("Mars", "Rocky", "Thin", False, star1)
-    planet3 = Planet.create_planet("Pluto", "Rocky", "None", False, star1)
- 
+    # DEBUGGING
+    # # Example List of pre-determined stars
+    # star1 = Star.create_star("The Sun")
+    # star2 = Star.create_star("Alpha Centauri")
+    # star3 = Star.create_star("Virgo")
+    # #Example list of pre determined planets
+    # planet1 = Planet.create_planet("Earth", "Rocky", "Air", True, star1)
+    # planet2 = Planet.create_planet("Mars", "Rocky", "Thin", False, star1)
+    # planet3 = Planet.create_planet("Pluto", "Rocky", "None", False, star1)
     # print(big_round_thing.all)
    
     # User input for Username

@@ -22,7 +22,7 @@ class big_round_thing:
         elif not 1 <= len(name) <= 100:
             raise ValueError("name lengths must be between 1 and 100 characters")
         elif (name in big_round_thing.all_names()):
-            raise ValueError("that name is already taken.")
+            raise ValueError(f"That name ({name}) is already taken.")
         else:
             self._name = name
             if old_name:
