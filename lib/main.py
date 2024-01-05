@@ -80,7 +80,7 @@ def planet_selection(username, star_choice):
         planets = [planet for planet in planets if planet.star.name.lower() == star_choice.lower()]
         planet_names = [planet.name for planet in planets]
         print('\n' + "Planets:" + '\n' + str(planet_names))
-        planet_selection_input = input(f"{username}, please select or create a planet to establish a colony on (type 'menu' to go back): ")
+        planet_selection_input = input(f"{username}, please select an existing planet to establish a colony on or type 'create' to create a new planet(type 'menu' to go back): ")
         if planet_selection_input.lower() == "menu":
             return None
         elif planet_selection_input.lower() == "create":
