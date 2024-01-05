@@ -66,9 +66,10 @@ class Planet(big_round_thing):
         CONN.commit()
     
     def delete(self):
+        print(f"delete was called on {self.name}")
         sql = """
             DELETE FROM planets
-            WHERE id = ?
+            WHERE id = ?;
         """
         CURSOR.execute(sql, (self.id,))
         CONN.commit

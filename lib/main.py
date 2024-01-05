@@ -79,8 +79,9 @@ def star_selection(username):
             new_star=input("New Star:")
             new_star = Star.create_star(new_star)
         elif star_selection_input == "Destroy":
-             star_instance = input("Enter star to destroy:")
+             star_choice = input("Enter star to destroy:")
              star_instance = [star for star in big_round_thing.all if star.name.lower() == star_choice.lower()][0]
+             star_instance.remove_star()
 
         elif star_selection_input in star_names:
             print("")

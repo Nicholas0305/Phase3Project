@@ -23,7 +23,7 @@ class Star(big_round_thing):
             CREATE TABLE IF NOT EXISTS stars (
             id INTEGER PRIMARY KEY,
             name TEXT
-            )
+            );
         """
         CURSOR.execute(sql)
         CONN.commit()
@@ -39,7 +39,7 @@ class Star(big_round_thing):
     def save(self):
         sql = """
             INSERT INTO stars (name)
-            VALUES (?)
+            VALUES (?);
         """
 
         CURSOR.execute(sql, [self.name])
