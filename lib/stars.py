@@ -104,4 +104,4 @@ class Star(big_round_thing):
         """
         CURSOR.execute(sql, (self.id,))
         CONN.commit()
-        super().delete(self)
+        big_round_thing.all.remove(self)

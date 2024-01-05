@@ -57,7 +57,8 @@ def star_selection(username):
             new_star=input("New Star:")
             new_star = Star.create_star(new_star)
         elif star_selection_input == "Destroy":
-            Hi.remove_star()
+             star_instance = input("Enter star to destroy:")
+             star_instance = [star for star in big_round_thing.all if star.name.lower() == star_choice.lower()][0]
 
         elif star_selection_input in star_names:
             print("")
@@ -93,6 +94,7 @@ def planet_selection(username, star_choice):
             
             planet_selection_input = input("Enter a planet to destroy:")
             planet = [planet for planet in big_round_thing.all if planet.name.lower() == planet_selection_input.lower()][0]
+            print(planet)
             planet.remove_planet()
         elif planet_selection_input in planet_names:
             print(f"You have selected {planet_selection_input}")

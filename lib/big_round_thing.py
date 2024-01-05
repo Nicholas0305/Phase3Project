@@ -33,6 +33,6 @@ class big_round_thing:
     def all_names():
         return [thing.name for thing in big_round_thing.all]
 
-    def delete(self):
-        big_round_thing.all.remove(self)
-        # The object still exists in memory with a variable assigned to it.
+    # def delete(self):
+    #     big_round_thing.all.remove(self)
+    #     # The object still exists in memory with a variable assigned to it.
