@@ -16,7 +16,7 @@ def list_stars_option():
     CURSOR.execute(sql)
     stars_table = CURSOR.fetchall()
     star_names = [star[1] for star in stars_table]
-    print(star_names)  # Assuming the name is in the second column
+    print(star_names)  
     return star_names
 
 def list_planets_option():
