@@ -24,7 +24,8 @@ def make_planets_from_db():
     planets_table = CURSOR.fetchall()
     # print(planets_table)
     planets = [list(planet) for planet in planets_table]
-    planets = [Planet(planet[1], planet[2], planet[3], bool(planet[4]), [star for star in big_round_thing.all if isinstance(star,Star) and star.id == planet[6]][0]) for planet in planets]
+    print(planets[len(planets)-1])
+    planets = [Planet(planet[1], planet[2], planet[3], bool(planet[4]), [star for star in big_round_thing.all if isinstance(star,Star) and star.id == planet[6]][0], planet[0]) for planet in planets]
     return planets
 
 def make_stars_from_db():
@@ -35,7 +36,6 @@ def make_stars_from_db():
     CURSOR.execute(sql)
     stars_table = CURSOR.fetchall()
     # stars_table is a list of tuples. make them lists.
-    # print(stars_table)
     stars = [list(star) for star in stars_table]
     # initialize star objects without adding them to the db
     stars = [Star(star[1], star[0]) for star in stars]

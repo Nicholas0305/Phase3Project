@@ -66,15 +66,15 @@ class Planet(big_round_thing):
         CONN.commit()
     
     def delete(self):
-        print(f"delete was called on {self.name}")
+        print(f"delete was called on planet id {self.id}")
         sql = """
             DELETE FROM planets
             WHERE id = ?;
         """
         CURSOR.execute(sql, (self.id,))
-        CONN.commit
+        CONN.commit()
         big_round_thing.all.remove(self)
-        
+    
     
     @classmethod
     def get_planets(cls):
