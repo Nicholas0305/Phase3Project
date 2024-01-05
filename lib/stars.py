@@ -13,7 +13,7 @@ class Star(big_round_thing):
     
     #Method to remove the star
     def remove_star(self):
-        print(f'Removing star: {self.name}')
+      
         self.delete()
 
     # Method to create sql table
@@ -85,7 +85,7 @@ class Star(big_round_thing):
         """
         CURSOR.execute(sql, (self.name, self.id))
         CONN.commit()
-
+    
     def delete(self):
         sql = """
             DELETE FROM stars
@@ -93,3 +93,4 @@ class Star(big_round_thing):
         """
         CURSOR.execute(sql, (self.id,))
         CONN.commit()
+   

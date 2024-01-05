@@ -24,7 +24,7 @@ class Planet(big_round_thing):
                 terrain TEXT,
                 atmosphere TEXT,
                 has_colony BOOLEAN,
-                population INTEGER,
+                population INTEGER
             )
         """
         CURSOR.execute(sql)

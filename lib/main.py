@@ -53,7 +53,9 @@ def star_selection(username):
             return None
         elif star_selection_input.lower() == "create":
             new_star=input("New Star:")
-            Star.create_star(new_star)
+            new_star = Star.create_star(new_star)
+        elif star_selection_input == "Destroy":
+            Hi.remove_star()
 
         elif star_selection_input in star_names:
             print("")
