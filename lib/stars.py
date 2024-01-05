@@ -47,11 +47,46 @@ class Star(big_round_thing):
 
         self.id = CURSOR.lastrowid
 
+    # @classmethod
+    # def create_star(cls, name):
+    #     star = cls(name)
+    #     star.save()
+    #     return star
+    
     @classmethod
     def create_star(cls, name):
+        # Check if a star with the same name already exists
+        existing_star = cls.get_star_by_name(name)
+        if existing_star:
+            print(f"A star with the name '{name}' already exists.")
+            return existing_star
+
+        # If no existing star, create a new one
         star = cls(name)
         star.save()
         return star
+
+    @classmethod
+    def get_star_by_name(cls, name):
+        sql = "SELECT * FROM stars WHERE name = ?"
+        result = CURSOR.execute(sql, (name,)).fetchone()
+
+        if result:
+            star_id, star_name = result
+            return cls(star_name, id=star_id)
+        else:
+            return None
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     def update(self):
         sql = """
