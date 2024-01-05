@@ -68,7 +68,7 @@ class Star(big_round_thing):
 
     @classmethod
     def get_star_by_name(cls, name):
-        sql = "SELECT * FROM stars WHERE name = ?"
+        sql = "SELECT * FROM stars WHERE name = ?;"
         result = CURSOR.execute(sql, (name,)).fetchone()
 
         if result:
@@ -81,7 +81,7 @@ class Star(big_round_thing):
         sql = """
             UPDATE stars
             SET name = ?
-            WHERE id = ?
+            WHERE id = ?;
         """
         CURSOR.execute(sql, (self.name, self.id))
         CONN.commit()
@@ -89,7 +89,7 @@ class Star(big_round_thing):
     def delete(self):
         sql = """
             DELETE FROM stars
-            WHERE id = ?
+            WHERE id = ?;
         """
         CURSOR.execute(sql, (self.id,))
         CONN.commit()

@@ -2,8 +2,6 @@ from big_round_thing import big_round_thing
 from init import CURSOR, CONN
 from stars import Star
 
-
-
 class Planet(big_round_thing):
     def __init__(self, name, terrain, atmosphere, has_colony, star, id = None):
         super().__init__(name)
@@ -25,7 +23,11 @@ class Planet(big_round_thing):
                 atmosphere TEXT,
                 has_colony BOOLEAN,
                 population INTEGER
+<<<<<<< HEAD
             )
+=======
+            );
+>>>>>>> 8e1ee3fe50b74cb46fa4b6ddcd86be442384517d
         """
         CURSOR.execute(sql)
         CONN.commit
@@ -41,7 +43,7 @@ class Planet(big_round_thing):
     def save(self):
         sql = """
             INSERT INTO planets (star_id, name, terrain, atmosphere, has_colony, population)
-            VALUES (?, ?, ?, ?, ?, ?, ?)
+            VALUES (?, ?, ?, ?, ?, ?, ?);
         """
         values = (self.star.id, self.name, self.terrain, self.atmosphere, self.has_colony, self.population)
         CURSOR.execute(sql, values)
@@ -59,9 +61,9 @@ class Planet(big_round_thing):
             UPDATE planets
             SET star_id = ?, name = ?, terrain = ?, atmosphere = ?,
                 has_colony = ?, population = ?
-            WHERE id = ?
+            WHERE id = ?;
         """
-        values = (self.star.id, self.name, self.terrain, self.atmosphere, self.has_colony, self.id)
+        values = (self.star.id, self.name, self.terrain, self.atmosphere, self.has_colony, self.population, self.id)
         CURSOR.execute(sql, values)
         CONN.commit()
     
