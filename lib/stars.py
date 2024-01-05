@@ -77,17 +77,6 @@ class Star(big_round_thing):
         else:
             return None
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     def update(self):
         sql = """
             UPDATE stars
