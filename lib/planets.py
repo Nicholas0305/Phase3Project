@@ -61,7 +61,7 @@ class Planet(big_round_thing):
                 has_colony = ?, population = ?, big_round_thing_id = ?
             WHERE id = ?
         """
-        values = (self.star.id, self.name, self.terrain, self.atmosphere, self.has_colony, self.population, self.big_round_thing_id, self.id)
+        values = (self.star.id, self.name, self.terrain, self.atmosphere, self.has_colony, self.id)
         CURSOR.execute(sql, values)
         CONN.commit()
     

@@ -51,9 +51,14 @@ def star_selection(username):
 
         if star_selection_input.lower() == "menu":
             return None
+        elif star_selection_input.lower() == "create":
+            new_star=input("New Star:")
+            Star.create_star(new_star)
 
-        if star_selection_input in star_names:
+        elif star_selection_input in star_names:
+            print("")
             print("Traveling to star")
+            print("")
             return star_selection_input
         
 
@@ -62,10 +67,13 @@ def star_selection(username):
         print("----------------Enter a valid star--------------------")
 
 def planet_selection(username, star_choice):
+    
     print("I'm in planet selection")
     while True:
-        planets_table = list_planets_option()
+        print("")
         print("Planets:")
+        print("")
+        planets_table = list_planets_option()
         print("")
         # Prints list of planets for the selected star
         for planet in planets_table:
@@ -73,17 +81,17 @@ def planet_selection(username, star_choice):
                 print(planet.name)
         # User choice to select or create planet
         planet_selection_input = input(f"{username}, please select or create a planet to establish a colony on (type 'menu' to go back): ")
-
+        star_instance = Star.get_star_by_name(star_choice)
         if planet_selection_input.lower() == "menu":
             return None
 
         # Add logic to handle planet selection or creation based on user input
         if planet_selection_input.lower() == "create":
             print("Enter the attributes you would like your planet to have")
-            name = input("Enter a name for the Planet")
-            terrain = input("Enter the terrain for the planet")
-            atmosphere = input("Enter the atmosphere for the planet")
-            Planet.create_planet(name, terrain, atmosphere, has_colony=False, star=star_choice)
+            name = input("Enter a name for the Planet:")
+            terrain = input("Enter the terrain for the planet:")
+            atmosphere = input("Enter the atmosphere for the planet:")
+            Planet.create_planet(name, terrain, atmosphere, has_colony=False, star=star_instance)
             # Optionally, you can break out of the loop or perform other actions here
 
         # Add more conditions as needed
