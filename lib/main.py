@@ -3,14 +3,11 @@ from planets import Planet
 from stars import Star
 from init import CURSOR, CONN
 
-<<<<<<< HEAD
-=======
 Star.create_table()
 Planet.create_table()
 star1 = Star.create_star("The Sun")
 star2 = Star.create_star("Alpha Centauri")
 star3 = Star.create_star("Virgo")
->>>>>>> Nicholas
 
 def list_stars_option():
     sql = """
