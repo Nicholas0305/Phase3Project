@@ -3,7 +3,7 @@ from planets import Planet
 from stars import Star
 from big_round_thing import big_round_thing
 from init import CURSOR, CONN
-import ipdb
+#import ipdb
 
 def list_stars_option():
     sql = """
@@ -71,9 +71,6 @@ def star_selection(username):
 def planet_selection(username, star_choice):
     star_choice = str(star_choice)
     planet_menu = True
-    # print("I'm in planet selection")
-    # print([thing.name for thing in big_round_thing.all])
-    #  I RAN INTO MAJOR DIFFICULTIES HERE. I HAD TO REPLACE star_choice WITH HARDCODED "The Sun" IN ORDER TO GET A STAR INSTANCE. -EVAN
     star_instance = [star for star in big_round_thing.all if star.name.lower() == "The Sun".lower()][0]
     if not isinstance(star_instance, Star):
         print(f"star_instance vlue is {star_instance}")
@@ -81,26 +78,23 @@ def planet_selection(username, star_choice):
     while planet_menu:
         planets = [item for item in big_round_thing.all if isinstance(item, Planet)]
         planets = [planet for planet in planets if planet.star.name.lower() == star_choice.lower()]
-        # Prints list of planets for the selected star
-        print('\n' + "Planets:" + '\n' + str([planet.name for planet in planets]))
-        # User choice to select or create planet
+        planet_names = [planet.name for planet in planets]
+        print('\n' + "Planets:" + '\n' + str(planet_names))
         planet_selection_input = input(f"{username}, please select or create a planet to establish a colony on (type 'menu' to go back): ")
         if planet_selection_input.lower() == "menu":
             return None
-
-        # Add logic to handle planet selection or creation based on user input
-        if planet_selection_input.lower() == "create":
+        elif planet_selection_input.lower() == "create":
             print("Enter the attributes you would like your planet to have")
             name = input("Enter a name for the Planet:")
             terrain = input("Enter the terrain for the planet:")
             atmosphere = input("Enter the atmosphere for the planet:")
             Planet.create_planet(name, terrain, atmosphere, False, star_instance)
-            # Optionally, you can break out of the loop or perform other actions here
-
-        # Add more conditions as needed
-
-        print("")
-        print("----------------Enter a valid planet--------------------")
+        elif planet_selection_input in planet_names:
+            print(f"You have selected {planet_selection_input}")
+            # Add code here to handle the selected planet
+        else:
+            print("")
+            print("----------------Enter a valid planet--------------------")
 
 #Exit message
 def exit_option():

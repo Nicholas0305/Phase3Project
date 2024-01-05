@@ -7,7 +7,7 @@ Create and establish new outposts and planets
 Read solar system/planet details and attributes 
 Update planet names,attributes,etc...
 Delete/remove planets from the solar system
-
+git
 Core Deliverables:
 
 1.Solar Systems with unique planets in database are generated
